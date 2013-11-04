@@ -1,6 +1,4 @@
-<h2>Welcome to Ember.js</h2>
-<ul>
-  {{#each item in content}}
-    <li>{{item.name}}</li>
-  {{/each}}
-</ul>
+<h1>Blimp Stats</h1>
+{{#each}}
+    {{stat-item title=title value=value lastUpdate=lastUpdate}}
+{{/each}}
