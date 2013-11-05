@@ -1,10 +1,10 @@
 <div class="content">
     <div class="left">
         <div class="title">{{title}}</div>
-        <div class="last-update">{{lastUpdate}}</div>
+        <div class="last-update">{{#withLast stats}}{{timeago this.lastUpdate}}{{/withLast}}</div>
     </div>
     <div class="right">
-        <div class="value">{{value}}</div>
+        <div class="value">{{#withLast stats}}{{this.value}}{{/withLast}}</div>
     </div>
 </div>
 

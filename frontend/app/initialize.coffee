@@ -1,4 +1,9 @@
 # ===== Config =====
+
+# Swag Config
+Swag.Config.partialsPath = 'templates/'
+Swag.registerHelpers()
+
 window.App = require 'config/app'
 require 'config/router'
 require 'config/store'

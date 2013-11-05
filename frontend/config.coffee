@@ -22,6 +22,10 @@ exports.config =
           'vendor/scripts/sails.io.js'
         ]
 
+        after: [
+          'vendor/scripts/swag.js'
+        ]
+
     stylesheets:
       joinTo:
         'stylesheets/app.css': /^(app|vendor)/
