@@ -6,12 +6,9 @@
     width 350px
 
     .content
-        background #a6c776
-        border 1px solid #a6c776
         height 60px
         left 0
         padding 10px 0
-        text-shadow 0 -1px 0 #98b66e
         top 0
         width 100%
         z-index 5
@@ -20,7 +17,6 @@
         color #fff
 
     .last-update
-        color #d3e2bb
         font-size 12px
 
     .title, .value
@@ -49,11 +45,7 @@
 
     path.line
         fill none
-        stroke #53aee2
         stroke-width 3
-
-    path.area
-        fill #cfddf0
 
     .axis
         shape-rendering crispEdges
@@ -72,3 +64,97 @@
         fill #bbbbbb
         font-size 10px
 
+    &.blue
+        .content
+            background #3b85c6
+            border 1px solid #3b85c6
+            text-shadow 0 -1px 0 darken(#3b85c6, 20%)
+
+        .last-update
+            color lighten(#3b85c6, 70%)
+
+        path.line
+            fill none
+            stroke #3b85c6
+
+        circle
+            fill darken(#3b85c6, 20%)
+
+        path.area
+            fill lighten(#3b85c6, 70%)
+
+    &.green
+        .content
+            background #61c08f
+            border 1px solid #61c08f
+            text-shadow 0 -1px 0 darken(#61c08f, 20%)
+
+        .last-update
+            color lighten(#61c08f, 70%)
+
+        path.line
+            fill none
+            stroke #61c08f
+
+        circle
+            fill darken(#61c08f, 20%)
+
+        path.area
+            fill lighten(#61c08f, 70%)
+
+    &.yellow
+        .content
+            background #efe162
+            border 1px solid #efe162
+            text-shadow 0 -1px 0 darken(#efe162, 20%)
+
+        .last-update
+            color lighten(#efe162, 70%)
+
+        path.line
+            fill none
+            stroke #efe162
+
+        circle
+            fill darken(#efe162, 20%)
+
+        path.area
+            fill lighten(#efe162, 70%)
+
+    &.orange
+        .content
+            background #f5b951
+            border 1px solid #f5b951
+            text-shadow 0 -1px 0 darken(#f5b951, 20%)
+
+        .last-update
+            color lighten(#f5b951, 70%)
+
+        path.line
+            fill none
+            stroke #f5b951
+
+        circle
+            fill darken(#f5b951, 20%)
+
+        path.area
+            fill lighten(#f5b951, 70%)
+
+    &.red
+        .content
+            background #ed7151
+            border 1px solid #ed7151
+            text-shadow 0 -1px 0 darken(#ed7151, 20%)
+
+        .last-update
+            color lighten(#ed7151, 70%)
+
+        path.line
+            fill none
+            stroke #ed7151
+
+        circle
+            fill darken(#ed7151, 20%)
+
+        path.area
+            fill lighten(#ed7151, 70%)

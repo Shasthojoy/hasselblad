@@ -4,6 +4,9 @@ module.exports = App.StatItemComponent = Ember.Component.extend
     classNames: ['stat-item']
 
     didInsertElement: ->
+        colors = ['blue', 'green', 'yellow', 'orange', 'red']
+        @$().addClass colors[Math.floor(Math.random() * (5 - 0 + 0)) + 0]
+
         data = @get 'snapshots'
         title = @get 'name'
         $graph = @$ '.graph'
@@ -102,7 +105,6 @@ module.exports = App.StatItemComponent = Ember.Component.extend
         svg.selectAll("circle")
         .data(data)
         .enter().append("circle")
-        .attr("fill", "#008cdd")
         .attr("r", 4)
         .attr('cx', (d) -> x(d.lastUpdate))
         .attr('cy', (d) -> y(d.value))
