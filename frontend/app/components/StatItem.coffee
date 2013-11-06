@@ -4,8 +4,8 @@ module.exports = App.StatItemComponent = Ember.Component.extend
     classNames: ['stat-item']
 
     didInsertElement: ->
-        data = @get 'stats'
-        title = @get 'title'
+        data = @get 'snapshots'
+        title = @get 'name'
         $graph = @$ '.graph'
 
         # remove last element crap
