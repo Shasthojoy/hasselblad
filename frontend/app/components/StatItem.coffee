@@ -18,7 +18,7 @@ module.exports = App.StatItemComponent = Ember.Component.extend
         m = [80, 80, 80, 80]
         w = 470 - m[1] - m[3]
         h = 290 - m[0] - m[2]
-        parse = d3.time.format("%Y-%m-%d").parse
+        parse = d3.time.format("%Y-%m-%dT%H:%M:%S.%LZ").parse
 
         x = d3.time.scale().range([0, w])
         y = d3.scale.linear().range([h, 0])
@@ -27,23 +27,23 @@ module.exports = App.StatItemComponent = Ember.Component.extend
 
         area = d3.svg.area()
         .interpolate("linear")
-        .x((d) -> x(d.lastUpdate))
+        .x((d) -> x(d.date))
         .y0(h)
         .y1((d) -> y(d.value))
 
         line = d3.svg.line()
         .interpolate("linear")
-        .x((d) -> x(d.lastUpdate))
+        .x((d) -> x(d.date))
         .y((d) -> y(d.value))
 
         data.forEach (d) ->
-            d.lastUpdate = parse(d.lastUpdate)
+            d.date = parse(d.date)
             d.value = +d.value
 
         total = 0
         total += stat.value for stat in data
 
-        x.domain([data[0].lastUpdate, data[data.length - 1].lastUpdate])
+        x.domain([data[0].date, data[data.length - 1].date])
         y.domain([0, d3.max(data, (d) -> d.value)]).nice()
 
         svg = d3.select($graph[0]).append("svg:svg")
@@ -106,6 +106,6 @@ module.exports = App.StatItemComponent = Ember.Component.extend
         .data(data)
         .enter().append("circle")
         .attr("r", 4)
-        .attr('cx', (d) -> x(d.lastUpdate))
+        .attr('cx', (d) -> x(d.date))
         .attr('cy', (d) -> y(d.value))
 
