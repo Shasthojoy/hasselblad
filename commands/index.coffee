@@ -1,8 +1,13 @@
 Waterline = require('waterline')
 adapter = require('sails-mongo')
 config = require('../config/adapters')
+cron = require('../cron')
+
 
 module.exports =
+    services: (done) ->
+        cron.startCron global.sails, done
+
     testCommand: (done) ->
         adapter.config = config.adapters.mongo
 
@@ -16,7 +21,4 @@ module.exports =
         , (err, collection) ->
             collection.find().done (err, collection) ->
                 console.log collection
-
-            Stat.find().done (err, stats) ->
-                console.log stats
                 done()
