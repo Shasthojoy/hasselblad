@@ -39,7 +39,6 @@ module.exports = App.StatItemComponent = Ember.Component.extend
 
         data.forEach (d) ->
             d.date = parse(d.date)
-            console.log title, d.date
             d.value = +d.value
 
         total = 0

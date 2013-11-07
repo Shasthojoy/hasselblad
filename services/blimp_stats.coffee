@@ -12,6 +12,6 @@ class BlimpStats extends Stats
                     projects: data.projects.length
 
             cb(stats)
-        ), '2013-10-01', '2013-11-07'
+        )
 
 module.exports = BlimpStats
