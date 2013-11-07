@@ -4,20 +4,28 @@ async = require('async')
 
 
 class BlimpService extends Service
-    constructor: (database, username, password) ->
-        @sequelize = new Sequelize database, username, password,
+    constructor: (db) ->
+        @sequelize = new Sequelize db.database, db.username, db.password,
             dialect: "postgres"
 
-    getData: (cb) ->
+    getData: (cb, dateFrom, dateTo) ->
+        dateTo ?= dateFrom if dateFrom?
+        $where = ''
         results = {}
 
         async.parallel [
             (callback) =>
-                @sequelize.query("SELECT * FROM auth_user;").success (rows) ->
+                if dateFrom?
+                    $where = " WHERE date_joined BETWEEN '#{dateFrom}' AND '#{dateTo}'"
+
+                @sequelize.query("SELECT * FROM auth_user#{$where};").success (rows) ->
                     results.users = rows
                     callback()
         ,   (callback) =>
-                @sequelize.query("SELECT * FROM core_project;").success (rows) ->
+                if dateFrom?
+                    $where = " WHERE date_created BETWEEN '#{dateFrom}' AND '#{dateTo}'"
+
+                @sequelize.query("SELECT * FROM core_project#{$where};").success (rows) ->
                     results.projects = rows
                     callback()
         ], (err) ->
