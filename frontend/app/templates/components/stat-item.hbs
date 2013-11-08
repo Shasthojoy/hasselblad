@@ -1,10 +1,13 @@
 <div class="content">
     <div class="left">
-        <div class="title">{{name}}</div>
+        <div class="title">{{name}} (<span class="value">{{stat-total snapshots}}</span>)</div>
         <div class="last-update">{{#withLast snapshots}}{{timeago this.date}}{{/withLast}}</div>
     </div>
     <div class="right">
-        <div class="value">{{#withLast snapshots}}{{this.value}}{{/withLast}}</div>
+        <button class="filter is-selected" {{action "filter"}}>Today</button>
+        <button class="filter" {{action "filter"}}>Yesterday</button>
+        <button class="filter" {{action "filter"}}>This Week</button>
+        <button class="filter" {{action "filter"}}>This Month</button>
     </div>
 </div>
 

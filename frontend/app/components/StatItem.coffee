@@ -4,14 +4,13 @@ module.exports = App.StatItemComponent = Ember.Component.extend
     classNames: ['stat-item']
 
     didInsertElement: ->
-        data = @get 'snapshots'
-        title = @get 'name'
+        data = @snapshots
+        title = @name
         $graph = @$ '.graph'
         colors = ['blue', 'green', 'yellow', 'orange', 'red']
 
         @$().addClass colors[Math.floor(Math.random() * (5 - 0 + 0)) + 0]
 
-        # remove last element crap
         data.pop()
         return unless data.length
 
@@ -110,3 +109,7 @@ module.exports = App.StatItemComponent = Ember.Component.extend
         .attr('cx', (d) -> x(d.date))
         .attr('cy', (d) -> y(d.value))
 
+    actions:
+        filter: ->
+            console.log 'filter'
+            @sendAction 'action', this

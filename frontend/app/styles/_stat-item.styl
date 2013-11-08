@@ -32,6 +32,22 @@
     .right
         right 10px
 
+    .filter
+        border 0 none
+        border-radius 4px
+        font-weight 100
+        line-heihgt 1.5
+        text-shadow 0 -1px 0 rgba(#000, 0.2)
+        padding 5px 10px
+        position relative
+        outline none
+        top 5px
+
+        &.is-selected
+            box-shadow 0 0 5px rgba(0,0,0,0.1) inset, 0 1px 0 rgba(255,255,255,0.3)
+            color #fff
+            text-shadow none
+
     .graph
         background #fff
         border 1px solid #eee
@@ -72,6 +88,10 @@
         .last-update
             color lighten(#3b85c6, 70%)
 
+        .filter
+            background darken(#3b85c6, 25%)
+            color lighten(#3b85c6, 70%)
+
         path.line
             fill none
             stroke #3b85c6
@@ -89,6 +109,10 @@
             text-shadow 0 -1px 0 darken(#61c08f, 20%)
 
         .last-update
+            color lighten(#61c08f, 70%)
+
+        .filter
+            background darken(#61c08f, 25%)
             color lighten(#61c08f, 70%)
 
         path.line
@@ -110,6 +134,10 @@
         .last-update
             color lighten(#efe162, 70%)
 
+        .filter
+            background darken(#efe162, 25%)
+            color lighten(#efe162, 70%)
+
         path.line
             fill none
             stroke #efe162
@@ -129,6 +157,10 @@
         .last-update
             color lighten(#f5b951, 70%)
 
+        .filter
+            background darken(#f5b951, 25%)
+            color lighten(#f5b951, 70%)
+
         path.line
             fill none
             stroke #f5b951
@@ -146,6 +178,10 @@
             text-shadow 0 -1px 0 darken(#ed7151, 20%)
 
         .last-update
+            color lighten(#ed7151, 70%)
+
+        .filter
+            background darken(#ed7151, 25%)
             color lighten(#ed7151, 70%)
 
         path.line
