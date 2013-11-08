@@ -17,8 +17,8 @@ module.exports = App.StatItemComponent = Ember.Component.extend
 
         #d3 0_o
         m = [80, 80, 80, 80]
-        w = 470 - m[1] - m[3]
-        h = 290 - m[0] - m[2]
+        w = ($graph.width() + 80) - m[1] - m[3]
+        h = 380 - m[0] - m[2]
         parse = d3.time.format("%Y-%m-%dT%H:%M:%S.%LZ").parse
 
         x = d3.time.scale().range([0, w])
@@ -51,7 +51,7 @@ module.exports = App.StatItemComponent = Ember.Component.extend
         .attr("width", w + m[1] + m[3])
         .attr("height", h + m[0] + m[2])
         .append("svg:g")
-        .attr("transform", "translate(#{12}, #{5})")
+        .attr("transform", "translate(#{30}, #{45})")
 
         svg.append("svg:path")
         .attr("class", "area")
