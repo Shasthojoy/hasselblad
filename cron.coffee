@@ -15,13 +15,32 @@ exports.startCron = (sails, cb) ->
     blimpStats = new BlimpStats(blimpService)
     statStore = new StatStore(sails.models.stat)
 
-    stats = {}
+    moment = require("moment")
+    a = moment("2013-11-10")
+    b = moment("2013-11-11")
+    m = a
 
-    async.parallel [
-        (callback) =>
-            blimpStats.getStats (results) ->
-                _.assign stats, results
-                callback()
-    ], (err) ->
-        statStore.save stats, (documents) ->
-            return cb(documents)
+    async.whilst (->
+        m.isBefore(b)
+    ), ((callback) ->
+        date = m.format("YYYY-MM-DD HH:mm:ss")
+
+        nextDate = moment(date).add('hours', 1).format("YYYY-MM-DD HH:mm:ss")
+
+        stats = {}
+
+        async.parallel [
+            (parallelCallback) =>
+                blimpStats.getStats ((results) ->
+                    _.assign stats, results
+                    parallelCallback()
+                ), date, nextDate
+        ], (err) ->
+            return callback(err) if (err)
+            statStore.save m.toDate(), stats, (documents) ->
+                return callback()
+
+        m.add("hours", 1)
+    ), (err) ->
+        return cb(err) if (err)
+        return cb()

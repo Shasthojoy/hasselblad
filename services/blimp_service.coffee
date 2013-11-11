@@ -7,6 +7,10 @@ class BlimpService extends Service
     constructor: (db) ->
         @sequelize = new Sequelize db.database, db.username, db.password,
             dialect: "postgres"
+            maxConcurrentQueries: 100
+            pool:
+                maxConnections: 5
+                maxIdleTime: 30
 
     getData: (cb, dateFrom, dateTo) ->
         dateTo ?= dateFrom if dateFrom?
@@ -29,6 +33,7 @@ class BlimpService extends Service
                     results.projects = rows
                     callback()
         ], (err) ->
+            return cb(err) if (err)
             return cb(results)
 
 module.exports = BlimpService

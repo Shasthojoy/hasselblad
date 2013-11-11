@@ -4,8 +4,7 @@ _ = require('lodash')
 class StatStore
     constructor: (@statModel) ->
 
-    save: (stats=[], cb) ->
-        now = new Date()
+    save: (date, stats=[], cb) ->
         hasselbladStats = []
         modifiedDocuments = []
 
@@ -16,7 +15,7 @@ class StatStore
                 serviceStatName = "#{serviceName}_#{statName}"
                 snapshot =
                     value: serviceStats[statName]
-                    date: now
+                    date: date
 
                 hasselbladStats.push
                     name: serviceStatName

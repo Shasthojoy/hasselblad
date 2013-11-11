@@ -14,7 +14,8 @@
     "sequelize": "~2.0.0-beta.1",
     "pg": "~2.8.2",
     "async": "~0.2.9",
-    "lodash": "~2.2.1"
+    "lodash": "~2.2.1",
+    "moment": "~2.4.0"
   },
   "scripts": {
     "start": "node app.js",
