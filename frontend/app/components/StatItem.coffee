@@ -3,15 +3,25 @@ module.exports = App.StatItemComponent = Ember.Component.extend
 
     classNames: ['stat-item']
 
+    filteredSnapshots: (snapshots) ->
+        now = moment()
+        nowFormatted = now.format('YYYY-MM-DD')
+        filter = 'today'
+
+        _.filter snapshots, (snapshot) ->
+            if filter is 'today'
+                moment(snapshot.date).format('YYYY-MM-DD') is nowFormatted
+            else
+                snapshot is snapshot
+
     didInsertElement: ->
-        data = @snapshots
+        data = @filteredSnapshots(@get 'snapshots')
         title = @name
         $graph = @$ '.graph'
         colors = ['blue', 'green', 'yellow', 'orange', 'red']
 
         @$().addClass colors[Math.floor(Math.random() * (5 - 0 + 0)) + 0]
 
-        data.pop()
         return unless data.length
 
         #d3 0_o
@@ -84,7 +94,6 @@ module.exports = App.StatItemComponent = Ember.Component.extend
         .attr("x", 80)
         .attr("y", -10)
         .attr("text-anchor", "end")
-        .text('Gross Volume')
         .style("stroke", "#444")
         .style("fill", "#000")
         .style("stroke-width", .2)

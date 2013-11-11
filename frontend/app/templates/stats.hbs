@@ -1,0 +1,7 @@
+<h1>Blimp Stats</h1>
+
+{{#each}}
+    {{#link-to 'stat' this}}
+        {{stat-item name=name snapshots=snapshots filter='today'}}
+    {{/link-to}}
+{{/each}}

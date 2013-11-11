@@ -10,6 +10,8 @@ module.exports = App.ApplicationAdapter = DS.RESTAdapter.extend
         adapter = this
 
         new Ember.RSVP.Promise (resolve, reject) ->
+            hash = hash || {}
+
             hash.callback = (obj) ->
                 unless Ember.isNone obj.status
                     Ember.run null, reject, obj
