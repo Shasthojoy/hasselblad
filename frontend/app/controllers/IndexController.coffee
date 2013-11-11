@@ -1,12 +1,9 @@
 module.exports = App.IndexController = Ember.ArrayController.extend
-    init: ->
-        console.log this
-
     filterBy: (filter) ->
-        console.log filter, ':O'
+        console.log filter
 
     actions:
         filter: ->
             console.log this
-            @filterBy 'tits'
+            @filterBy 'today'
             @set 'filter', 'something'
