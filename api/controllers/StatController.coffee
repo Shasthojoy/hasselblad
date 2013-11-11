@@ -19,27 +19,6 @@ NOTE: The code you write here supports both HTTP and Socket.io automatically.
 
 module.exports =
 
-    index: (request, response) ->
-        sails.log.info('StatControler index action...')
-
-        now = moment()
-        nowFormatted = now.format('YYYY-MM-DD')
-        filter = request.query?.filter || request.body?.filter
-
-        Stat.find().done (err, stats) ->
-            return res.send(err, 500) if err
-
-            _.forEach stats, (stat) ->
-                stat.snapshots = _.filter stat.snapshots, (snapshot) ->
-                    if filter is 'today'
-                        moment(snapshot.date).format('YYYY-MM-DD') is nowFormatted
-                    else
-                        snapshot is snapshot
-            console.log stats
-            response.json(stats)
-
-
-
     ###
     Overrides for the settings in `config/controllers.js`
     (specific to StatController)
@@ -47,4 +26,4 @@ module.exports =
     _config:
         blueprints:
             actions: true
-            rest: false
+            rest: true
