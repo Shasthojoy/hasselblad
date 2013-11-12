@@ -3,21 +3,11 @@ module.exports = App.StatGraphView = Ember.View.extend
     classNames: ['graph']
     attributeBindings: ['title']
 
-    series: (->
-        @get 'content'
-    ).property('content')
-
-    redraw: (->
-        @rerender()
-    ).observes('content')
-
     didInsertElement: ->
-        snapshots = @get 'series'
+        snapshots = @get 'content'
         title = @get 'title'
         data = []
         $graph = @$()
-
-        console.log title
 
         return unless snapshots.length
 
