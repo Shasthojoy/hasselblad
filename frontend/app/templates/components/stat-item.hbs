@@ -1,8 +1,8 @@
 <div class="content">
     <div class="left">
-        <div class="title">{{name}} (<span class="value">{{stat-total snapshots}}</span>)</div>
-        <div class="last-update">{{#withLast snapshots}}{{timeago this.date}}{{/withLast}}</div>
+        <div class="title">{{name}} (<span class="value">{{stat-total filteredSnapshots}}</span>)</div>
+        <div class="last-update">{{#withLast filteredSnapshots}}{{timeago date}}{{/withLast}}</div>
     </div>
 </div>
 
-<div class="graph"></div>
+{{view App.StatGraphView titleBinding="name" contentBinding="filteredSnapshots"}}
