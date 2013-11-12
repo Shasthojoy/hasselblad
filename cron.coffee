@@ -16,8 +16,8 @@ exports.startCron = (sails, cb) ->
     statStore = new StatStore(sails.models.stat)
 
     moment = require("moment")
-    a = moment("2013-11-10")
-    b = moment("2013-11-11")
+    a = moment("2013-10-01")
+    b = moment("2013-11-12")
     m = a
 
     async.whilst (->

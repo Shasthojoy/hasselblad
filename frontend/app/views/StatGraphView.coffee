@@ -3,13 +3,17 @@ module.exports = App.StatGraphView = Ember.View.extend
     classNames: ['graph']
     attributeBindings: ['title']
 
-    didInsertElement: ->
-        snapshots = @get 'content'
+    draw: (->
+        $el = @$()
         title = @get 'title'
-        data = []
-        $graph = @$()
+        snapshots = @get 'content'
+
+        # To test data binding e.g. (App.dataTest.blimp_projects[6].set('value', 400))
+        App.dataTest[title] = snapshots
 
         return unless snapshots.length
+
+        $el.empty()
 
         #d3 0_o
         m = [80, 80, 80, 80]
@@ -24,27 +28,28 @@ module.exports = App.StatGraphView = Ember.View.extend
 
         area = d3.svg.area()
         .interpolate("linear")
-        .x((d) -> x(d.date))
+        .x((snapshot) -> x(snapshot.get 'date'))
         .y0(h)
-        .y1((d) -> y(d.value))
+        .y1((snapshot) -> y(snapshot.get 'value'))
 
         line = d3.svg.line()
         .interpolate("linear")
-        .x((d) -> x(d.date))
-        .y((d) -> y(d.value))
+        .x((snapshot) -> x(snapshot.get 'date'))
+        .y((snapshot) -> y(snapshot.get 'value'))
 
-        snapshots.forEach (d) ->
-            data.push
-                date: parse(d.date)
-                value: d.value
+        _.each snapshots, (snapshot) ->
+            date = snapshot.get 'date'
+            parsedDate = if _.isDate(date) then date else parse date
+            snapshot.set 'date', parsedDate
+            snapshot.set 'value', +(snapshot.get 'value')
 
         total = 0
-        total += stat.value for stat in data
+        total += snapshot.get('value') for snapshot in snapshots
 
-        x.domain([data[0].date, data[data.length - 1].date])
-        y.domain([0, d3.max(data, (d) -> d.value)]).nice()
+        x.domain([_.first(snapshots).get('date'), _.last(snapshots).get('date')])
+        y.domain([0, d3.max(snapshots, (snapshot) -> snapshot.get 'value')]).nice()
 
-        svg = d3.select($graph[0]).append("svg:svg")
+        svg = d3.select($el[0]).append("svg:svg")
         .attr("width", w + m[1] + m[3])
         .attr("height", h + m[0] + m[2])
         .append("svg:g")
@@ -52,7 +57,7 @@ module.exports = App.StatGraphView = Ember.View.extend
 
         svg.append("svg:path")
         .attr("class", "area")
-        .attr("d", area(data))
+        .attr("d", area(snapshots))
 
         svg.append("svg:g")
         .attr("class", "x axis")
@@ -76,7 +81,7 @@ module.exports = App.StatGraphView = Ember.View.extend
 
         svg.append("svg:path")
         .attr("class", "line")
-        .attr("d", line(data))
+        .attr("d", line(snapshots))
 
         svg.append("svg:text")
         .attr("x", 80)
@@ -100,8 +105,12 @@ module.exports = App.StatGraphView = Ember.View.extend
         .style("font-weight", "bold")
 
         svg.selectAll("circle")
-        .data(data)
+        .data(snapshots)
         .enter().append("circle")
         .attr("r", 4)
-        .attr('cx', (d) -> x(d.date))
-        .attr('cy', (d) -> y(d.value))
+        .attr('cx', (snapshot) -> x(snapshot.get 'date'))
+        .attr('cy', (snapshot) -> y(snapshot.get 'value'))
+    ).observes 'content.@each.value'
+
+    didInsertElement: ->
+        @draw()

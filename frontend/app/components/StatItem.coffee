@@ -4,17 +4,29 @@ module.exports = App.StatItemComponent = Ember.Component.extend
     classNames: ['stat-item']
 
     filteredSnapshots: (->
-        filter = @filter
-        now = moment()
-        nowFormatted = now.format('YYYY-MM-DD')
+        filter = @get 'filter'
+        filterFunction = ->
 
-        _.filter @snapshots, (snapshot) ->
-            if filter is 'today'
-                moment(snapshot.date).format('YYYY-MM-DD') is nowFormatted
+        switch filter
+            when 'today'
+                filterFunction = (snapshot) ->
+                    today = moment().format 'YYYY-MM-DD'
+                    moment(snapshot.date).format('YYYY-MM-DD') is today
+            when 'yesterday'
+                filterFunction = (snapshot) ->
+                    d = new Date()
+                    d.setDate d.getDate() - 1
+                    yesterday = moment(d).format 'YYYY-MM-DD'
+                    moment(snapshot.date).format('YYYY-MM-DD') is yesterday
             else
-                snapshot is snapshot
+                filterFunction = -> true
+
+        filteredSpanshots = _.filter @get('snapshots'), filterFunction
+        _.map filteredSpanshots, (snapshot) -> Ember.Object.create snapshot
     ).property()
 
     didInsertElement: ->
         colors = ['blue', 'green', 'yellow', 'orange', 'red']
         @$().addClass colors[Math.floor(Math.random() * (5 - 0 + 0)) + 0]
+
+
