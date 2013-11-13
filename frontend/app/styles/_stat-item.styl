@@ -1,9 +1,39 @@
 .stat-item
-    display inline-block
-    height 210px
-    margin 0 15px 15px 0
     position relative
-    width 350px
+
+    &.grid
+        display inline-block
+        height 300px
+        margin 0 15px 15px 0
+        width 400px
+
+        .right
+            display none
+
+    &.single
+        display block
+        height 350px
+        margin-bottom 15px
+        width 100%
+
+        .right
+            display block
+
+        .filter
+            border 0 none
+            border-radius 4px
+            font-weight 100
+            line-heihgt 1.5
+            text-shadow 0 -1px 0 rgba(#000, 0.2)
+            padding 5px 10px
+            position relative
+            outline none
+            top 5px
+
+            &.is-selected
+                box-shadow 0 0 5px rgba(0,0,0,0.1) inset, 0 1px 0 rgba(255,255,255,0.3)
+                color #fff
+                text-shadow none
 
     .content
         height 60px
@@ -33,31 +63,20 @@
     .right
         right 10px
 
-    .filter
-        border 0 none
-        border-radius 4px
-        font-weight 100
-        line-heihgt 1.5
-        text-shadow 0 -1px 0 rgba(#000, 0.2)
-        padding 5px 10px
-        position relative
-        outline none
-        top 5px
-
-        &.is-selected
-            box-shadow 0 0 5px rgba(0,0,0,0.1) inset, 0 1px 0 rgba(255,255,255,0.3)
-            color #fff
-            text-shadow none
-
     .graph
         background #fff
         border 1px solid #eee
         border-top 0 none
         bottom 0
-        height 150px
+        height 300px
         left 0
         width 100%
         z-index 1
+
+        & > svg
+            height 100% !important
+            width 100% !important
+
 
     path.line
         fill none
@@ -76,8 +95,8 @@
         stroke-opacity 0.06
 
     text
-        stroke none
-        fill #bbbbbb
+        stroke none !important
+        fill #999 !important
         font-size 10px
 
     &.blue

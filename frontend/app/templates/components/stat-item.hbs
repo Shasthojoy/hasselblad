@@ -1,8 +1,13 @@
 <div class="content">
     <div class="left">
-        {{debug}}
         <div class="title">{{name}} (<span class="value">{{stat-total filteredSnapshots}}</span>)</div>
-        <div class="last-update">{{#withLast filteredSnapshots}}{{timeago date}}{{/withLast}}</div>
+        <div class="last-update">{{timeago lastSnapshotDate}}</div>
+    </div>
+    <div class="right">
+        <button {{bind-attr class=":filter filterIsToday:is-selected"}} {{action "filter" "today"}}>Today</button>
+        <button {{bind-attr class=":filter filterIsYesterday:is-selected"}} {{action "filter" "yesterday"}}>Yesterday</button>
+        <button {{bind-attr class=":filter filterIsWeek:is-selected"}} {{action "filter" "week"}}>A Week Ago</button>
+        <button {{bind-attr class=":filter filterIsMonth:is-selected"}} {{action "filter" "month"}}>A This Month Ago</button>
     </div>
 </div>
 

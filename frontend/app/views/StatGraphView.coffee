@@ -17,8 +17,8 @@ module.exports = App.StatGraphView = Ember.View.extend
 
         #d3 0_o
         m = [80, 80, 80, 80]
-        w = 470 - m[1] - m[3]
-        h = 290 - m[0] - m[2]
+        w = $el.width() - 50
+        h = $el.height() - 110
         parse = d3.time.format("%Y-%m-%dT%H:%M:%S.%LZ").parse
 
         x = d3.time.scale().range([0, w])
@@ -50,10 +50,10 @@ module.exports = App.StatGraphView = Ember.View.extend
         y.domain([0, d3.max(snapshots, (snapshot) -> snapshot.get 'value')]).nice()
 
         svg = d3.select($el[0]).append("svg:svg")
-        .attr("width", w + m[1] + m[3])
-        .attr("height", h + m[0] + m[2])
+        .attr("width", w)
+        .attr("height", h)
         .append("svg:g")
-        .attr("transform", "translate(#{12}, #{5})")
+        .attr("transform", "translate(#{30}, #{90})")
 
         svg.append("svg:path")
         .attr("class", "area")

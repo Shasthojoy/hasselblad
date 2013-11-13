@@ -2,6 +2,6 @@
 
 {{#each}}
     {{#link-to 'stat' this}}
-        {{stat-item name=name snapshots=snapshots filter='yesterday'}}
+        {{stat-item name=name snapshots=snapshots filter='yesterday' class="grid"}}
     {{/link-to}}
 {{/each}}
