@@ -22,14 +22,14 @@ class BlimpService extends Service
                 if dateFrom?
                     $where = " WHERE date_joined >= '#{dateFrom}' AND date_joined <= '#{dateTo}'"
 
-                @sequelize.query("SELECT * FROM auth_user#{$where};").success (rows) ->
+                @sequelize.query("SELECT * FROM auth_user#{$where} ORDER BY date_joined;").success (rows) ->
                     results.users = rows
                     callback()
         ,   (callback) =>
                 if dateFrom?
                     $where = " WHERE date_created >= '#{dateFrom}' AND date_created <= '#{dateTo}'"
 
-                @sequelize.query("SELECT * FROM core_project#{$where};").success (rows) ->
+                @sequelize.query("SELECT * FROM core_project#{$where} ORDER BY date_created;").success (rows) ->
                     results.projects = rows
                     callback()
         ], (err) ->
