@@ -27,13 +27,33 @@ class BlimpStats extends Stats
                         _users = _.filter data.users, (user) ->
                             moment_range(user.date_joined).within range
 
+                        _companies = _.filter data.companies, (company) ->
+                            moment_range(company.date_created).within range
+
                         _projects = _.filter data.projects, (project) ->
                             moment_range(project.date_created).within range
+
+                        _todos = _.filter data.todos, (todo) ->
+                            moment_range(todo.date_created).within range
+
+                        _lists = _.filter data.lists, (list) ->
+                            moment_range(list.date_created).within range
+
+                        _files = _.filter data.files, (file) ->
+                            moment_range(file.date_created).within range
+
+                        _discussions = _.filter data.discussions, (discussion) ->
+                            moment_range(discussion.date_created).within range
 
                         results =
                             blimp:
                                 users: _users.length
                                 projects: _projects.length
+                                companies: _companies.length
+                                todos: _todos.length
+                                lists: _lists.length
+                                files: _files.length
+                                discussions: _discussions.length
 
                         _.assign stats, results
                         parallelCallback()

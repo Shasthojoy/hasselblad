@@ -29,8 +29,43 @@ class BlimpService extends Service
                 if dateFrom?
                     $where = " WHERE date_created >= '#{dateFrom}' AND date_created <= '#{dateTo}'"
 
+                @sequelize.query("SELECT * FROM core_company#{$where} ORDER BY date_created;").success (rows) ->
+                    results.companies = rows
+                    callback()
+        ,   (callback) =>
+                if dateFrom?
+                    $where = " WHERE date_created >= '#{dateFrom}' AND date_created <= '#{dateTo}'"
+
                 @sequelize.query("SELECT * FROM core_project#{$where} ORDER BY date_created;").success (rows) ->
                     results.projects = rows
+                    callback()
+        ,   (callback) =>
+                if dateFrom?
+                    $where = " WHERE date_created >= '#{dateFrom}' AND date_created <= '#{dateTo}'"
+
+                @sequelize.query("SELECT * FROM core_todo#{$where} ORDER BY date_created;").success (rows) ->
+                    results.todos = rows
+                    callback()
+        ,   (callback) =>
+                if dateFrom?
+                    $where = " WHERE date_created >= '#{dateFrom}' AND date_created <= '#{dateTo}'"
+
+                @sequelize.query("SELECT * FROM core_list#{$where} ORDER BY date_created;").success (rows) ->
+                    results.lists = rows
+                    callback()
+        ,   (callback) =>
+                if dateFrom?
+                    $where = " WHERE date_created >= '#{dateFrom}' AND date_created <= '#{dateTo}'"
+
+                @sequelize.query("SELECT * FROM core_file#{$where} ORDER BY date_created;").success (rows) ->
+                    results.files = rows
+                    callback()
+        ,   (callback) =>
+                if dateFrom?
+                    $where = " WHERE date_created >= '#{dateFrom}' AND date_created <= '#{dateTo}'"
+
+                @sequelize.query("SELECT * FROM discussions_message#{$where} ORDER BY date_created;").success (rows) ->
+                    results.discussions = rows
                     callback()
         ], (err) ->
             return cb(err) if (err)

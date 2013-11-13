@@ -16,8 +16,8 @@ exports.startCron = (sails, cb) ->
     blimpStats = new BlimpStats(blimpService)
     statStore = new StatStore(sails.models.stat)
 
-    a = moment("2013-01-01")
-    b = moment("2013-11-12")
+    a = moment("2013-10-13")
+    b = moment("2013-11-13")
     aDate = a.format("YYYY-MM-DD HH:mm:ss")
     bDate = b.format("YYYY-MM-DD HH:mm:ss")
 
