@@ -17,7 +17,7 @@ class BlimpStats extends Stats
             async.whilst (->
                 current.isBefore(to)
             ), ((callback) ->
-                nextDate = moment(current).add('hours', 1)
+                nextDate = moment(current).add('d', 1)
                 range = moment_range().range(current, nextDate)
 
                 stats = {}
@@ -64,7 +64,7 @@ class BlimpStats extends Stats
                         console.log '-----------------'
                         return callback()
 
-                current.add("hours", 1)
+                current.add("d", 1)
             ), (err) ->
                 return cb(err) if (err)
                 return cb()
