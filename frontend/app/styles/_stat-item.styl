@@ -1,77 +1,63 @@
 .stat-item
-    position relative
+    border-radius 6px
+    color #fff
+    padding 10px
 
-    &.grid
-        display inline-block
-        height 300px
-        margin 0 15px 15px 0
-        width 400px
+    .title
+        font-size 22px
+        font-weight 100
+        margin-bottom 10px
+        text-transform uppercase
 
-        .right
+    .metadata
+        font-size 16px
+        margin-bottom 10px
+
+    .no-data
+        font-size 30px
+        font-weight 100
+        margin 0
+        padding 0
+        position relative
+        text-align center
+        top 80px
+
+    .data
+        .graph
             display none
 
-    &.single
-        display block
-        height 350px
-        margin-bottom 15px
-        width 100%
-
-        .right
+        .no-data
             display block
 
-        .filter
-            border 0 none
-            border-radius 4px
-            font-weight 100
-            line-heihgt 1.5
-            text-shadow 0 -1px 0 rgba(#000, 0.2)
-            padding 5px 10px
-            position relative
-            outline none
-            top 5px
+        &.data-available
+            .graph
+                display block
 
-            &.is-selected
-                box-shadow 0 0 5px rgba(0,0,0,0.1) inset, 0 1px 0 rgba(255,255,255,0.3)
-                color #fff
-                text-shadow none
+            .no-data
+                display none
 
-    .content
-        height 60px
-        left 0
-        padding 10px 0
-        top 0
-        width 100%
-        z-index 5
+    .filters
+        display block
+        margin-bottom 10px
 
-    .title, .last-update, .value
-        color #fff
+    .filter
+        border 0 none
+        border-radius 4px
+        font-weight 100
+        line-heihgt 1.5
+        text-shadow 0 -1px 0 rgba(#000, 0.2)
+        padding 5px 10px
+        position relative
+        outline none
+        top 5px
 
-    .last-update
-        font-size 12px
-
-    .title, .value
-        font-size 16px
-        font-weight 600
-        margin-bottom 5px
-
-    .content, .left, .right, .graph
-        position absolute
-
-    .left
-        left 10px
-
-    .right
-        right 10px
+        &.is-selected
+            box-shadow 0 0 5px rgba(0,0,0,0.1) inset, 0 1px 0 rgba(255,255,255,0.3)
+            color #fff
+            text-shadow none
 
     .graph
-        background #fff
-        border 1px solid #eee
-        border-top 0 none
-        bottom 0
-        height 300px
-        left 0
-        width 100%
-        z-index 1
+        font-weight 100
 
         & > svg
             height 100% !important
@@ -80,7 +66,12 @@
 
     path.line
         fill none
-        stroke-width 3
+        stroke #fff
+        stroke-width 2
+
+    path.area
+        fill #fff
+        opacity 0.2
 
     .axis
         shape-rendering crispEdges
@@ -90,126 +81,108 @@
 
     .y.axis path, .y.axis line
         fill none
-        stroke #000000
+        stroke #fff
         stroke-width 1px
         stroke-opacity 0.06
 
     text
         stroke none !important
-        fill #999 !important
+        fill #fff !important
         font-size 10px
 
-    &.blue
-        .content
-            background #3b85c6
-            border 1px solid #3b85c6
-            text-shadow 0 -1px 0 darken(#3b85c6, 20%)
+    &.grid
+        display inline-block
+        height 250px
+        margin 0 2px 5px 0
+        width 33%
 
-        .last-update
+        .filters
+            display none
+
+        .graph
+            height 150px
+            width 440px
+
+    &.single
+        display block
+        height 500px
+        margin 0 auto
+        width 960px
+
+        .graph
+            height 350px
+            width 940px
+
+        .no-data
+            font-size 42px
+            top 150px
+
+    &.blue
+        background #3b85c6
+        text-shadow 0 -1px 0 darken(#3b85c6, 20%)
+
+        .metadata
             color lighten(#3b85c6, 70%)
 
         .filter
             background darken(#3b85c6, 25%)
             color lighten(#3b85c6, 70%)
 
-        path.line
-            fill none
-            stroke #3b85c6
-
         circle
-            fill darken(#3b85c6, 20%)
-
-        path.area
-            fill lighten(#3b85c6, 70%)
+            fill darken(#3b85c6, 35%)
 
     &.green
-        .content
-            background #61c08f
-            border 1px solid #61c08f
-            text-shadow 0 -1px 0 darken(#61c08f, 20%)
+        background #61c08f
+        text-shadow 0 -1px 0 darken(#61c08f, 20%)
 
-        .last-update
+        .metadata
             color lighten(#61c08f, 70%)
 
         .filter
             background darken(#61c08f, 25%)
             color lighten(#61c08f, 70%)
 
-        path.line
-            fill none
-            stroke #61c08f
-
         circle
-            fill darken(#61c08f, 20%)
-
-        path.area
-            fill lighten(#61c08f, 70%)
+            fill darken(#61c08f, 35%)
 
     &.yellow
-        .content
-            background #efe162
-            border 1px solid #efe162
-            text-shadow 0 -1px 0 darken(#efe162, 20%)
+        background #efe162
+        text-shadow 0 -1px 0 darken(#efe162, 20%)
 
-        .last-update
+        .metadata
             color lighten(#efe162, 70%)
 
         .filter
             background darken(#efe162, 25%)
             color lighten(#efe162, 70%)
 
-        path.line
-            fill none
-            stroke #efe162
-
         circle
-            fill darken(#efe162, 20%)
-
-        path.area
-            fill lighten(#efe162, 70%)
+            fill darken(#efe162, 35%)
 
     &.orange
-        .content
-            background #f5b951
-            border 1px solid #f5b951
-            text-shadow 0 -1px 0 darken(#f5b951, 20%)
+        background #f5b951
+        text-shadow 0 -1px 0 darken(#f5b951, 20%)
 
-        .last-update
+        .metadata
             color lighten(#f5b951, 70%)
 
         .filter
             background darken(#f5b951, 25%)
             color lighten(#f5b951, 70%)
 
-        path.line
-            fill none
-            stroke #f5b951
-
         circle
-            fill darken(#f5b951, 20%)
-
-        path.area
-            fill lighten(#f5b951, 70%)
+            fill darken(#f5b951, 35%)
 
     &.red
-        .content
-            background #ed7151
-            border 1px solid #ed7151
-            text-shadow 0 -1px 0 darken(#ed7151, 20%)
+        background #ed7151
+        text-shadow 0 -1px 0 darken(#ed7151, 20%)
 
-        .last-update
+        .metadata
             color lighten(#ed7151, 70%)
 
         .filter
             background darken(#ed7151, 25%)
             color lighten(#ed7151, 70%)
 
-        path.line
-            fill none
-            stroke #ed7151
-
         circle
-            fill darken(#ed7151, 20%)
-
-        path.area
-            fill lighten(#ed7151, 70%)
+            fill darken(#ed7151, 35%)

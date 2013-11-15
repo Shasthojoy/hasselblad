@@ -1,14 +1,17 @@
-<div class="content">
-    <div class="left">
-        <div class="title">{{name}} (<span class="value">{{stat-total filteredSnapshots}}</span>)</div>
-        <div class="last-update">{{timeago lastSnapshotDate}}</div>
-    </div>
-    <div class="right">
-        <button {{bind-attr class=":filter filterIsToday:is-selected"}} {{action "filter" "today"}}>Today</button>
-        <button {{bind-attr class=":filter filterIsYesterday:is-selected"}} {{action "filter" "yesterday"}}>Yesterday</button>
-        <button {{bind-attr class=":filter filterIsWeek:is-selected"}} {{action "filter" "week"}}>A Week Ago</button>
-        <button {{bind-attr class=":filter filterIsMonth:is-selected"}} {{action "filter" "month"}}>A Month Ago</button>
-    </div>
-</div>
+<div class="title">{{name}}</div>
 
-{{view App.StatGraphView titleBinding="name" contentBinding="filteredSnapshots"}}
+{{#if snapshotsAvailable}}
+    <div class="metadata">{{stat-total filteredSnapshots}} | {{timeago lastSnapshotDate}}</div>
+{{/if}}
+
+<div class="filters">
+    <button {{bind-attr class=":filter filterIsToday:is-selected"}} {{action "filter" "today"}}>Today</button>
+    <button {{bind-attr class=":filter filterIsYesterday:is-selected"}} {{action "filter" "yesterday"}}>Yesterday</button>
+    <button {{bind-attr class=":filter filterIsWeek:is-selected"}} {{action "filter" "week"}}>A Week Ago</button>
+    <button {{bind-attr class=":filter filterIsMonth:is-selected"}} {{action "filter" "month"}}>A Month Ago</button>
+</div> {{! .filters }}
+
+<div {{bind-attr class=":data snapshotsAvailable:data-available"}}>
+    {{view App.StatGraphView titleBinding="name" contentBinding="filteredSnapshots"}}
+    <p class="no-data">No Data Available</p>
+</div> {{! .data }}

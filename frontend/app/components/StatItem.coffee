@@ -39,13 +39,29 @@ module.exports = App.StatItemComponent = Ember.Component.extend
         filteredSpanshots = _.filter @get('snapshots'), filterFunction
         _.map filteredSpanshots, (snapshot) -> Ember.Object.create snapshot
 
+    getLastSnapshotDate: ->
+        last = _.last @get 'filteredSnapshots'
+        if last then last.get('date') else ''
+
+    checkSnapshotsAvailable: ->
+        @get('filteredSnapshots').length > 0
+
     filteredSnapshots: (->
         @filterSnapshots()
     ).property()
 
     lastSnapshotDate: (->
-        _.last(@get 'filteredSnapshots').get 'date'
+        @getLastSnapshotDate()
     ).property()
+
+    snapshotsAvailable: (->
+        @checkSnapshotsAvailable()
+    ).property()
+
+    onSnapshotsFiltered: (->
+        @set 'lastSnapshotDate', @getLastSnapshotDate()
+        @set 'snapshotsAvailable', @checkSnapshotsAvailable()
+    ).observes('filteredSnapshots')
 
     didInsertElement: ->
         colors = ['blue', 'green', 'yellow', 'orange', 'red']
