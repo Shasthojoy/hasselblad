@@ -16,10 +16,12 @@ module.exports = App.StatGraphView = Ember.View.extend
 
             $el.empty()
 
+            console.log $el.width()
+
             #d3 0_o
             m = [20, 20, 20, 20]
-            w = $el.width() - m[1] - m[3]
-            h = $el.height() - m[0] - m[2]
+            w = ($el.width() - 20) - m[1] - m[3]
+            h = ($el.height() + 10) - m[0] - m[2]
             parse = d3.time.format("%Y-%m-%dT%H:%M:%S.%LZ").parse
             tickFormat = d3.time.format("%-m/%d %-I%p")
 
@@ -55,7 +57,7 @@ module.exports = App.StatGraphView = Ember.View.extend
             .attr("width", w)
             .attr("height", h)
             .append("svg:g")
-            .attr("transform", "translate(0,30)")
+            .attr("transform", "translate(20,20)")
 
             svg.append("svg:path")
             .attr("class", "area")
