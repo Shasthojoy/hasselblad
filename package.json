@@ -16,7 +16,8 @@
     "async": "~0.2.9",
     "lodash": "~2.2.1",
     "moment": "~2.4.0",
-    "moment-range": "~0.1.7"
+    "moment-range": "~0.1.7",
+    "stripe": "2.2.1"
   },
   "scripts": {
     "start": "node app.js",

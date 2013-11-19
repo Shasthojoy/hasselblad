@@ -68,7 +68,6 @@ class BlimpStats extends Stats
             ), (err) ->
                 return cb(err) if (err)
                 return cb()
-
         ), dateFrom, dateTo
 
 module.exports = BlimpStats

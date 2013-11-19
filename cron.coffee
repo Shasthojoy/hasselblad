@@ -1,10 +1,13 @@
-async = require 'async'
 _ = require 'lodash'
+async = require 'async'
 moment = require 'moment'
-BlimpService = require './services/blimp_service'
-BlimpStats = require './services/blimp_stats'
-StatStore = require './services/stat_store'
+
 local = require './local'
+StatStore = require './services/stat_store'
+BlimpStats = require './services/blimp_stats'
+BlimpService = require './services/blimp_service'
+StripeStats = require './services/stripe_stats'
+StripeService = require './services/stripe_service'
 
 exports.startCron = (sails, cb) ->
     db =
@@ -12,13 +15,22 @@ exports.startCron = (sails, cb) ->
         username: local.dbUser
         password: local.dbPass
 
-    blimpService = new BlimpService(db)
-    blimpStats = new BlimpStats(blimpService)
-    statStore = new StatStore(sails.models.stat)
+    a = moment '2013-11-01'
+    b = moment '2013-11-19'
+    aDate = a.format 'YYYY-MM-DD HH:mm:ss'
+    bDate = b.format 'YYYY-MM-DD HH:mm:ss'
 
-    a = moment("2013-11-01")
-    b = moment("2013-11-18")
-    aDate = a.format("YYYY-MM-DD HH:mm:ss")
-    bDate = b.format("YYYY-MM-DD HH:mm:ss")
+    StatStore = new StatStore sails.models.stat
 
-    blimpStats.getStats cb, statStore, aDate, bDate
+    BlimpService = new BlimpService db
+    BlimpStats = new BlimpStats BlimpService
+
+    StripeService = new StripeService()
+    StripeStats = new StripeStats StripeService
+
+    async.parallel [
+        ( (callback) -> StripeStats.getStats callback, StatStore, aDate, bDate),
+        ( (callback) -> BlimpStats.getStats callback, StatStore, aDate, bDate)
+    ], ->
+        console.log 'DONE'
+        cb()

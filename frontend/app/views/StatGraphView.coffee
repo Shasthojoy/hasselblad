@@ -16,8 +16,6 @@ module.exports = App.StatGraphView = Ember.View.extend
 
             $el.empty()
 
-            console.log $el.width()
-
             #d3 0_o
             m = [20, 20, 20, 20]
             w = ($el.width() - 20) - m[1] - m[3]
