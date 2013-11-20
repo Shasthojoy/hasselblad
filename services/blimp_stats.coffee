@@ -27,6 +27,9 @@ class BlimpStats extends Stats
                         _users = _.filter data.users, (user) ->
                             moment_range(user.date_joined).within range
 
+                        _active_users = _.filter data.active_users, (user) ->
+                            moment_range(user.last_login).within range
+
                         _companies = _.filter data.companies, (company) ->
                             moment_range(company.date_created).within range
 
@@ -48,6 +51,7 @@ class BlimpStats extends Stats
                         results =
                             blimp:
                                 users: _users.length
+                                active_users: _active_users.length
                                 projects: _projects.length
                                 companies: _companies.length
                                 todos: _todos.length

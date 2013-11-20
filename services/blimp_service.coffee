@@ -14,56 +14,56 @@ class BlimpService extends Service
 
     getData: (cb, dateFrom, dateTo) ->
         dateTo ?= dateFrom if dateFrom?
-        $where = ''
         results = {}
+        $where = ''
+
+        if dateFrom?
+            $where = " WHERE date_created >= '#{dateFrom}' AND date_created <= '#{dateTo}'"
 
         async.parallel [
             (callback) =>
-                if dateFrom?
-                    $where = " WHERE date_joined >= '#{dateFrom}' AND date_joined <= '#{dateTo}'"
+                $w = ''
 
-                @sequelize.query("SELECT * FROM auth_user#{$where} ORDER BY date_joined;").success (rows) ->
+                if dateFrom?
+                    $w = " WHERE date_joined >= '#{dateFrom}' AND date_joined <= '#{dateTo}'"
+
+                @sequelize.query("SELECT * FROM auth_user#{$w} ORDER BY date_joined;").success (rows) ->
                     results.users = rows
                     callback()
         ,   (callback) =>
-                if dateFrom?
-                    $where = " WHERE date_created >= '#{dateFrom}' AND date_created <= '#{dateTo}'"
+                $w = ''
 
+                if dateFrom?
+                    $w = " WHERE last_login >= '#{dateFrom}' AND last_login <= '#{dateTo}'"
+
+                @sequelize.query("SELECT * FROM auth_user#{$w} ORDER BY last_login;").success (rows) ->
+                    results.active_users = rows
+                    callback()
+        ,   (callback) =>
                 @sequelize.query("SELECT * FROM core_company#{$where} ORDER BY date_created;").success (rows) ->
                     results.companies = rows
                     callback()
         ,   (callback) =>
-                if dateFrom?
-                    $where = " WHERE date_created >= '#{dateFrom}' AND date_created <= '#{dateTo}'"
-
                 @sequelize.query("SELECT * FROM core_project#{$where} ORDER BY date_created;").success (rows) ->
                     results.projects = rows
                     callback()
         ,   (callback) =>
-                if dateFrom?
-                    $where = " WHERE date_created >= '#{dateFrom}' AND date_created <= '#{dateTo}'"
-
                 @sequelize.query("SELECT * FROM core_todo#{$where} ORDER BY date_created;").success (rows) ->
                     results.todos = rows
                     callback()
         ,   (callback) =>
-                if dateFrom?
-                    $where = " WHERE date_created >= '#{dateFrom}' AND date_created <= '#{dateTo}'"
-
                 @sequelize.query("SELECT * FROM core_list#{$where} ORDER BY date_created;").success (rows) ->
                     results.lists = rows
                     callback()
         ,   (callback) =>
-                if dateFrom?
-                    $where = " WHERE date_created >= '#{dateFrom}' AND date_created <= '#{dateTo}'"
-
                 @sequelize.query("SELECT * FROM core_file#{$where} ORDER BY date_created;").success (rows) ->
                     results.files = rows
                     callback()
         ,   (callback) =>
-                if dateFrom?
-                    $where = " WHERE date_created >= '#{dateFrom}' AND date_created <= '#{dateTo}'"
-
+                @sequelize.query("SELECT * FROM discussions_message#{$where} ORDER BY date_created;").success (rows) ->
+                    results.discussions = rows
+                    callback()
+        ,   (callback) =>
                 @sequelize.query("SELECT * FROM discussions_message#{$where} ORDER BY date_created;").success (rows) ->
                     results.discussions = rows
                     callback()
