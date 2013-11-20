@@ -12,16 +12,30 @@ class StripeStats extends Stats
         @service.getData (data) ->
             to = new Date dateTo
             from = new Date dateFrom
-            range = moment().range from, to
+            stats = {}
+            current = moment dateFrom
 
-            customers = _.filter data, (customer) ->
-                moment(new Date customer.created * 1000).within range
-
-            results = stripe: customers: customers.length
-            console.log results
-            statStore.save from, _.assign({}, results), (docs) ->
-                console.log '-----------------'
-                cb()
+            async.whilst ->
+                current.isBefore moment to
+            , (callback) ->
+                range = moment().range from, moment(current).add 'd', 1
+                async.parallel [
+                    (parallelCallback) =>
+                        customers = _.filter data, (customer) ->
+                            moment(new Date customer.created * 1000).within range
+                        results = stripe: customers: customers.length
+                        _.assign stats, results
+                        parallelCallback()
+                ], (err) ->
+                    return callback(err) if (err)
+                    console.log stats
+                    statStore.save current.toDate(), stats, (documents) ->
+                        console.log '-----------------'
+                        return callback()
+                current.add 'd', 1
+            , (err) ->
+                return cb(err) if (err)
+                return cb()
         , dateFrom, dateTo
 
 module.exports = StripeStats
