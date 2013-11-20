@@ -4,25 +4,25 @@ _ = require('lodash')
 class StatStore
     constructor: (@statModel) ->
 
-    save: (date, stats=[], cb) ->
+    save: (serviceName, date, stats=[], cb) ->
         hasselbladStats = []
         modifiedDocuments = []
 
-        for serviceName in _.keys(stats)
-            serviceStats = stats[serviceName]
+        for statName in _.keys(stats)
+            snapshot =
+                value: stats[statName]
+                date: date
 
-            for statName in _.keys(serviceStats)
-                serviceStatName = "#{serviceName}_#{statName}"
-                snapshot =
-                    value: serviceStats[statName]
-                    date: date
-
-                hasselbladStats.push
-                    name: serviceStatName
-                    snapshots: [snapshot]
+            hasselbladStats.push
+                name: statName
+                snapshots: [snapshot]
 
         async.each hasselbladStats, (stat, callback) =>
-            @statModel.findByName(stat.name).done (err, documents) =>
+            criteria =
+                name: stat.name
+                service: serviceName
+
+            @statModel.find(criteria).done (err, documents) =>
                 return callback(err) if err
 
                 if documents.length == 1
@@ -37,6 +37,7 @@ class StatStore
                 else if documents.length == 0
                     @statModel.create(
                         name: stat.name
+                        service: serviceName
                         snapshots: stat.snapshots
                     ).done (err, documents) ->
                         return callback(err) if err

@@ -23,13 +23,13 @@ class StripeStats extends Stats
                     (parallelCallback) =>
                         customers = _.filter data, (customer) ->
                             moment(new Date customer.created * 1000).within range
-                        results = stripe: customers: customers.length
+                        results = customers: customers.length
                         _.assign stats, results
                         parallelCallback()
                 ], (err) ->
                     return callback(err) if (err)
                     console.log stats
-                    statStore.save current.toDate(), stats, (documents) ->
+                    statStore.save 'stripe', current.toDate(), stats, (documents) ->
                         console.log '-----------------'
                         return callback()
                 current.add 'd', 1

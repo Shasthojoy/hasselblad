@@ -49,22 +49,21 @@ class BlimpStats extends Stats
                             moment_range(discussion.date_created).within range
 
                         results =
-                            blimp:
-                                users: _users.length
-                                active_users: _active_users.length
-                                projects: _projects.length
-                                companies: _companies.length
-                                todos: _todos.length
-                                lists: _lists.length
-                                files: _files.length
-                                discussions: _discussions.length
+                            users: _users.length
+                            active_users: _active_users.length
+                            projects: _projects.length
+                            companies: _companies.length
+                            todos: _todos.length
+                            lists: _lists.length
+                            files: _files.length
+                            discussions: _discussions.length
 
                         _.assign stats, results
                         parallelCallback()
                 ], (err) ->
                     return callback(err) if (err)
                     console.log stats
-                    statStore.save current.toDate(), stats, (documents) ->
+                    statStore.save 'blimp', current.toDate(), stats, (documents) ->
                         console.log '-----------------'
                         return callback()
 
