@@ -8,6 +8,8 @@ BlimpStats = require './services/blimp_stats'
 BlimpService = require './services/blimp_service'
 StripeStats = require './services/stripe_stats'
 StripeService = require './services/stripe_service'
+GoogleAnalyticsStats = require './services/google_analytics_stats'
+GoogleAnalyticsService = require './services/google_analytics_service'
 
 exports.startCron = (sails, cb) ->
     db =
@@ -28,7 +30,11 @@ exports.startCron = (sails, cb) ->
     StripeService = new StripeService()
     StripeStats = new StripeStats StripeService
 
+    GoogleAnalyticsService = new GoogleAnalyticsService()
+    GoogleAnalyticsStats = new GoogleAnalyticsStats GoogleAnalyticsService
+
     async.parallel [
+        ( (callback) -> GoogleAnalyticsStats.getStats callback, StatStore, aDate, bDate),
         ( (callback) -> StripeStats.getStats callback, StatStore, aDate, bDate),
         ( (callback) -> BlimpStats.getStats callback, StatStore, aDate, bDate)
     ], ->
