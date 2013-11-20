@@ -78,8 +78,9 @@ module.exports = App.StatGraphView = Ember.View.extend
             .attr("x2", w)
             .attr("y1", y)
             .attr("y2", y)
+            .attr("transform", "translate(0,0.01)")
             .style("stroke", "#fff")
-            .style("stroke-opacity", 0.05)
+            .style("stroke-opacity", 0.5)
 
             svg.append("svg:path")
             .attr("class", "line")
