@@ -6,11 +6,10 @@ async = require('async')
 class BlimpService extends Service
     constructor: (db) ->
         @sequelize = new Sequelize db.database, db.username, db.password,
-            dialect: "postgres"
-            maxConcurrentQueries: 100
-            pool:
-                maxConnections: 5
-                maxIdleTime: 30
+            dialect: 'postgres'
+            protocol: 'postgres'
+            port: db.port
+            host: db.host
 
     getData: (cb, dateFrom, dateTo) ->
         dateTo ?= dateFrom if dateFrom?

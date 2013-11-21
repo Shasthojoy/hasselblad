@@ -12,10 +12,24 @@ GoogleAnalyticsStats = require './services/google_analytics_stats'
 GoogleAnalyticsService = require './services/google_analytics_service'
 
 exports.startCron = (sails, cb) ->
-    db =
-        database: 'blimp'
-        username: local.dbUser
-        password: local.dbPass
+
+    blimpDatabaseURL = process.env.BLIMP_DATABASE_URL
+
+    if blimpDatabaseURL
+        match = blimpDatabaseURL.match(/postgres:\/\/([^:]+):([^@]+)@([^:]+):(\d+)\/(.+)/)
+        db =
+            database: match[5]
+            username: match[1]
+            password: match[2]
+            host: match[3]
+            port: match[4]
+    else
+        db =
+            database: 'blimp'
+            username: local.dbUser
+            password: local.dbPass
+            host: 'localhost'
+            port: 5432
 
     googleUser = local.googleUser
     googlePassword = local.googlePassword
