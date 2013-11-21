@@ -16,7 +16,7 @@ module.exports = App.StatGraphView = Ember.View.extend
 
             #d3 0_o
             m = [20, 20, 20, 20]
-            w = ($el.width() - 120) - m[1] - m[3]
+            w = ($el.width() - 50) - m[1] - m[3]
             h = ($el.height() + 5) - m[0] - m[2]
             parse = d3.time.format("%Y-%m-%dT%H:%M:%S.%LZ").parse
             tickFormat = d3.time.format("%-m/%d %-I%p")
