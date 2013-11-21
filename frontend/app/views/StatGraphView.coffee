@@ -99,8 +99,27 @@ module.exports = App.StatGraphView = Ember.View.extend
             .attr("r", 4)
             .attr('cx', (snapshot) -> x(snapshot.get 'date'))
             .attr('cy', (snapshot) -> y(snapshot.get 'value'))
-            .append('svg:title')
-            .text((snapshot) -> snapshot.get 'value')
+
+
+            # Initialize tooltip
+            tip = d3.tip()
+            .attr('class', 'd3-tip')
+            .offset([30, 0])
+            .html((snapshot) -> snapshot.get 'value')
+
+            # Invoke the tip in the context of your visualization
+            svg.call tip
+
+            svg.selectAll(".hidden-circle")
+            .data(snapshots)
+            .enter().append("circle")
+            .attr('class', 'hidden-circle')
+            .attr("r", 50)
+            .attr('cx', (snapshot) -> x(snapshot.get 'date'))
+            .attr('cy', (snapshot) -> y(snapshot.get 'value'))
+            #Show and hide tip on mouse events
+            .on('mouseover', tip.show)
+            .on('mouseout', tip.hide)
 
     ).observes 'content.@each.value'
 
