@@ -1,7 +1,10 @@
-Stripe = require('stripe')(require('../local').stripe)
+Stripe = require('stripe')
 Service = require './service'
 
 class StripeService extends Service
+    constructor: (apiKey) ->
+        @stripe = new Stripe apiKey
+
     getData: (cb, dateFrom, dateTo) ->
         options = created: {}
 
@@ -10,7 +13,7 @@ class StripeService extends Service
             options.created.lte = new Date(dateFrom).getTime()
             options.created.gte = new Date(dateTo).getTime()
 
-        Stripe.customers.list (err, customers) ->
+        @stripe.customers.list (err, customers) ->
             if err? then cb(err) else cb(customers.data)
 
 module.exports = StripeService

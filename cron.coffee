@@ -27,7 +27,7 @@ exports.startCron = (sails, cb) ->
     BlimpService = new BlimpService db
     BlimpStats = new BlimpStats BlimpService
 
-    StripeService = new StripeService()
+    StripeService = new StripeService local.stripe
     StripeStats = new StripeStats StripeService
 
     GoogleAnalyticsService = new GoogleAnalyticsService()
