@@ -1,6 +1,6 @@
-moment = require("moment")
+var moment = require("moment");
 
-###
+/*
 StatController
 
 @module      :: Controller
@@ -15,15 +15,19 @@ and/or override them with custom routes (`config/routes.js`)
 NOTE: The code you write here supports both HTTP and Socket.io automatically.
 
 @docs        :: http://sailsjs.org/#!documentation/controllers
-###
+*/
 
-module.exports =
 
-    ###
-    Overrides for the settings in `config/controllers.js`
-    (specific to StatController)
-    ###
-    _config:
-        blueprints:
-            actions: true
-            rest: true
+module.exports = {
+  /*
+      Overrides for the settings in `config/controllers.js`
+      (specific to StatController)
+  */
+
+  _config: {
+    blueprints: {
+      actions: true,
+      rest: true
+    }
+  }
+};
