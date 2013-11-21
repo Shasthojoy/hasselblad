@@ -1,4 +1,3 @@
-local = require '../local'
 Service = require './service'
 
 GA = require 'googleanalytics'
@@ -6,16 +5,17 @@ util = require 'util'
 moment = require 'moment'
 
 class GoogleAnalyticsService extends Service
-    getData: (cb, dateFrom, dateTo) ->
-        ga = new GA.GA
-            user: local.googleUser
-            password: local.googlePassword
+    constructor: (user, password, @profile) ->
+        @ga = new GA.GA
+            user: user
+            password: password
 
-        ga.login (err, token) ->
+    getData: (cb, dateFrom, dateTo) ->
+        @ga.login (err, token) =>
             metrics = ['ga:pageviews', 'ga:visitors', 'ga:newVisits']
 
             options =
-                ids: "ga:#{local.googleProfile}"
+                ids: "ga:#{@profile}"
                 sort: 'ga:date'
                 metrics: metrics.join ','
                 dimensions: 'ga:date'
@@ -25,7 +25,7 @@ class GoogleAnalyticsService extends Service
                 options['end-date'] = moment(new Date dateTo).format 'YYYY-MM-DD'
                 options['start-date'] = moment(new Date dateFrom).format 'YYYY-MM-DD'
 
-            ga.get options, (err, entries) ->
+            @ga.get options, (err, entries) ->
                 # util.debug(JSON.stringify(entries))
                 if err? then cb(err) else cb(entries)
 

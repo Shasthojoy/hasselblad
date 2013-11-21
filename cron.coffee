@@ -17,6 +17,10 @@ exports.startCron = (sails, cb) ->
         username: local.dbUser
         password: local.dbPass
 
+    googleUser = local.googleUser
+    googlePassword = local.googlePassword
+    googleProfile = local.googleProfile
+
     a = moment '2013-11-01'
     b = moment '2013-11-20'
     aDate = a.format 'YYYY-MM-DD HH:mm:ss'
@@ -30,7 +34,7 @@ exports.startCron = (sails, cb) ->
     StripeService = new StripeService local.stripe
     StripeStats = new StripeStats StripeService
 
-    GoogleAnalyticsService = new GoogleAnalyticsService()
+    GoogleAnalyticsService = new GoogleAnalyticsService googleUser, googlePassword, googleProfile
     GoogleAnalyticsStats = new GoogleAnalyticsStats GoogleAnalyticsService
 
     async.parallel [
