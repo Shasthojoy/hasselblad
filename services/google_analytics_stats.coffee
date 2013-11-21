@@ -31,17 +31,16 @@ class GoogleAnalyticsStats extends Stats
                             moment(current).add('d', 1).format('YYYYMMDD') is item.dimensions[0]['ga:date']
 
                         results =
-                            google:
-                                views: snapshot.metrics[0]['ga:pageviews']
-                                visitors: snapshot.metrics[0]['ga:visitors']
-                                uniqueVisitors: snapshot.metrics[0]['ga:newVisits']
+                            views: snapshot.metrics[0]['ga:pageviews']
+                            visitors: snapshot.metrics[0]['ga:visitors']
+                            unique_visitors: snapshot.metrics[0]['ga:newVisits']
 
                         _.assign stats, results
                         parallelCallback()
                 ], (err) ->
                     return callback(err) if (err)
                     console.log stats
-                    statStore.save current.toDate(), stats, (documents) ->
+                    statStore.save 'google_analytics', current.toDate(), stats, (documents) ->
                         console.log '-----------------'
                         return callback()
                 current.add 'd', 1
