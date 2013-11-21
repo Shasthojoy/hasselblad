@@ -100,10 +100,9 @@ module.exports = App.StatGraphView = Ember.View.extend
             .attr('cx', (snapshot) -> x(snapshot.get 'date'))
             .attr('cy', (snapshot) -> y(snapshot.get 'value'))
 
-
             # Initialize tooltip
             tip = d3.tip()
-            .attr('class', 'd3-tip')
+            .attr('class', "d3-tip #{_.last($el.parents('.stat-item').attr('class').split(' '))}")
             .offset([30, 0])
             .html((snapshot) -> snapshot.get 'value')
 

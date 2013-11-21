@@ -41,7 +41,7 @@
 
     .filter
         border 0 none
-        border-radius 4px
+        border-radius 6px
         font-weight 100
         line-heihgt 1.5
         text-shadow 0 -1px 0 rgba(#000, 0.2)
@@ -328,12 +328,138 @@
 
 .d3-tip
     line-height 1
-    font-weight bold
+    font-weight 100
     padding 12px
     background rgba(0, 0, 0, 0.8)
     color #fff
-    border-radius 2px
+    border-radius 6px
     z-index 1000
+
+    &.turquoise
+        background darken(#1abc9c, 35%)
+        text-shadow 0 -1px 0 darken(#1abc9c, 65%)
+
+        &:after
+            color darken(#1abc9c, 35%)
+
+    &.emerald
+        background darken(#2ecc71, 35%)
+        text-shadow 0 -1px 0 darken(#2ecc71, 65%)
+
+        &:after
+            color darken(#2ecc71, 35%)
+
+    &.greensea
+        background darken(#16a085, 35%)
+        text-shadow 0 -1px 0 darken(#16a085, 65%)
+
+        &:after
+            color darken(#16a085, 35%)
+
+    &.nephritis
+        background darken(#27ae60, 35%)
+        text-shadow 0 -1px 0 darken(#27ae60, 65%)
+
+        &:after
+            color darken(#27ae60, 35%)
+
+    &.peterriver
+        background darken(#3498db, 35%)
+        text-shadow 0 -1px 0 darken(#3498db, 65%)
+
+        &:after
+            color darken(#3498db, 35%)
+
+    &.belizehole
+        background darken(#2980b9, 35%)
+        text-shadow 0 -1px 0 darken(#2980b9, 65%)
+
+        &:after
+            color darken(#2980b9, 35%)
+
+    &.amethyst
+        background darken(#9b59b6, 35%)
+        text-shadow 0 -1px 0 darken(#9b59b6, 65%)
+
+        &:after
+            color darken(#9b59b6, 35%)
+
+    &.wisteria
+        background darken(#8e44ad, 35%)
+        text-shadow 0 -1px 0 darken(#8e44ad, 65%)
+
+        &:after
+            color darken(#8e44ad, 35%)
+
+    &.wetasphalt
+        background darken(#34495e, 35%)
+        text-shadow 0 -1px 0 darken(#34495e, 65%)
+
+        &:after
+            color darken(#34495e, 35%)
+
+    &.midnightblue
+        background darken(#2c3e50, 35%)
+        text-shadow 0 -1px 0 darken(#2c3e50, 65%)
+
+        &:after
+            color darken(#2c3e50, 35%)
+
+    &.sunflower
+        background darken(#f1c40f, 35%)
+        text-shadow 0 -1px 0 darken(#f1c40f, 65%)
+
+        &:after
+            color darken(#f1c40f, 35%)
+
+    &.orange
+        background darken(#f39c12, 35%)
+        text-shadow 0 -1px 0 darken(#f39c12, 65%)
+
+        &:after
+            color darken(#f39c12, 35%)
+
+    &.carrot
+        background darken(#e67e22, 35%)
+        text-shadow 0 -1px 0 darken(#e67e22, 65%)
+
+        &:after
+            color darken(#e67e22, 35%)
+
+    &.pumpkin
+        background darken(#d35400, 35%)
+        text-shadow 0 -1px 0 darken(#d35400, 65%)
+
+        &:after
+            color darken(#d35400, 35%)
+
+    &.alizarin
+        background darken(#e74c3c, 35%)
+        text-shadow 0 -1px 0 darken(#e74c3c, 65%)
+
+        &:after
+            color darken(#e74c3c, 35%)
+
+    &.pomegranate
+        background darken(#c0392b, 35%)
+        text-shadow 0 -1px 0 darken(#c0392b, 65%)
+
+        &:after
+            color darken(#c0392b, 35%)
+
+    &.concrete
+        background darken(#95a5a6, 35%)
+        text-shadow 0 -1px 0 darken(#95a5a6, 65%)
+
+        &:after
+            color darken(#95a5a6, 35%)
+
+    &.asbestos
+        background darken(#7f8c8d, 35%)
+        text-shadow 0 -1px 0 darken(#7f8c8d, 65%)
+
+        &:after
+            color darken(#7f8c8d, 35%)
 
  // Creates a small triangle extender for the tooltip
 .d3-tip:after
@@ -349,6 +475,6 @@
 
  // Style northward tooltips differently
 .d3-tip.n:after
-    margin -3px 0 0 0
+    margin -1px 0 0 0
     top 100%
     left 0
