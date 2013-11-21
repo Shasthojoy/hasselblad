@@ -33,6 +33,7 @@ class GoogleAnalyticsStats extends Stats
                         results =
                             views: snapshot.metrics[0]['ga:pageviews']
                             visitors: snapshot.metrics[0]['ga:visitors']
+                            minutes_on_app: _.parseInt snapshot.metrics[0]['ga:timeOnSite'] * 0.0166667
                             unique_visitors: snapshot.metrics[0]['ga:newVisits']
 
                         _.assign stats, results

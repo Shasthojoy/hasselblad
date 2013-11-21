@@ -12,7 +12,7 @@ class GoogleAnalyticsService extends Service
 
     getData: (cb, dateFrom, dateTo) ->
         @ga.login (err, token) =>
-            metrics = ['ga:pageviews', 'ga:visitors', 'ga:newVisits']
+            metrics = ['ga:pageviews', 'ga:visitors', 'ga:newVisits', 'ga:timeOnSite']
 
             options =
                 ids: "ga:#{@profile}"
@@ -26,7 +26,7 @@ class GoogleAnalyticsService extends Service
                 options['start-date'] = moment(new Date dateFrom).format 'YYYY-MM-DD'
 
             @ga.get options, (err, entries) ->
-                # util.debug(JSON.stringify(entries))
+                util.debug(JSON.stringify(entries))
                 if err? then cb(err) else cb(entries)
 
 module.exports = GoogleAnalyticsService

@@ -22,7 +22,7 @@ exports.startCron = (sails, cb) ->
     googleProfile = local.googleProfile
 
     a = moment '2013-11-01'
-    b = moment '2013-11-20'
+    b = moment '2013-11-21'
     aDate = a.format 'YYYY-MM-DD HH:mm:ss'
     bDate = b.format 'YYYY-MM-DD HH:mm:ss'
 
