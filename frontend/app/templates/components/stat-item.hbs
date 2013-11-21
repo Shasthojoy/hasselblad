@@ -12,6 +12,6 @@
 </div> {{! .filters }}
 
 <div {{bind-attr class=":data snapshotsAvailable:data-available"}}>
-    {{view App.StatGraphView titleBinding="name" contentBinding="filteredSnapshots"}}
+    {{view App.StatGraphView contentBinding="filteredSnapshots"}}
     <p class="no-data">No Data Available</p>
 </div> {{! .data }}

@@ -3,8 +3,6 @@ module.exports = App.StatGraphView = Ember.View.extend
 
     classNames: ['graph']
 
-    attributeBindings: ['title']
-
     draw: (->
         $el = @$()
         title = @get 'title'
@@ -95,22 +93,15 @@ module.exports = App.StatGraphView = Ember.View.extend
             .style("font-size", "11px")
             .style("font-weight", "bold")
 
-            svg.append("svg:text")
-            .attr("x", w)
-            .attr("y", -10)
-            .attr("text-anchor", "end")
-            .text(total)
-            .style("fill", "#fff")
-            .style("stroke-width", .2)
-            .style("font-size", "11px")
-            .style("font-weight", "bold")
-
             svg.selectAll("circle")
             .data(snapshots)
             .enter().append("circle")
             .attr("r", 4)
             .attr('cx', (snapshot) -> x(snapshot.get 'date'))
             .attr('cy', (snapshot) -> y(snapshot.get 'value'))
+            .append('svg:title')
+            .text((snapshot) -> snapshot.get 'value')
+
     ).observes 'content.@each.value'
 
     didInsertElement: ->
