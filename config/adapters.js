@@ -26,10 +26,6 @@ module.exports.adapters = {
 
     mongo: {
         module: 'sails-mongo',
-        host: 'localhost',
-        port: 27017,
-        user: '',
-        password: '',
-        database: 'hasselblad'
+        url: process.env.MONGOHQ_URL || 'mongodb://localhost:27017/hasselblad'
     }
 };
