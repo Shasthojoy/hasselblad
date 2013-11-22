@@ -19,6 +19,7 @@
     "moment-range": "~0.1.7",
     "stripe": "2.2.1",
     "googleanalytics": "~0.3.4",
+    "brunch": "~1.7.10",
     "javascript-brunch": "~1.5.1",
     "coffee-script-brunch": "~1.5.1",
     "css-brunch": "~1.5.1",
@@ -31,7 +32,6 @@
   "devDependencies": {
     "karma": "~0.10.2",
     "karma-qunit": "*"
-    "brunch": "~1.7.10"
   },
   "scripts": {
     "start": "node app.js",
