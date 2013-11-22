@@ -1,14 +1,12 @@
 exports.config =
     paths:
-        root: 'frontend'
         public: 'assets'
-        watched: ['frontend/app', 'frontend/test', 'frontend/vendor']
 
     files:
         javascripts:
             joinTo:
-                'javascripts/app.js': /^frontend(\/|\\)app/
-                'javascripts/vendor.js': /^frontend(\/|\\)vendor/
+                'javascripts/app.js': /^app/
+                'javascripts/vendor.js': /^vendor/
 
             order:
                 before: [
@@ -27,11 +25,11 @@ exports.config =
 
         stylesheets:
             joinTo:
-                'stylesheets/app.css': /^frontend(\/|\\)(app|vendor)/
+                'stylesheets/app.css': /^(app|vendor)/
             order:
                 before: ['vendor/styles/normalize.css']
 
         templates:
             precompile: true
             root: 'templates'
-            joinTo: 'javascripts/app.js' : /^frontend(\/|\\)app/
+            joinTo: 'javascripts/app.js' : /^app/
