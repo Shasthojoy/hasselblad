@@ -1,1 +1,1 @@
-web: brunch build --production && node app.js
+web: node app.js
