@@ -18,7 +18,19 @@
     "moment": "~2.4.0",
     "moment-range": "~0.1.7",
     "stripe": "2.2.1",
-    "googleanalytics": "~0.3.4"
+    "googleanalytics": "~0.3.4",
+    "javascript-brunch": "~1.5.1",
+    "coffee-script-brunch": "~1.5.1",
+    "css-brunch": "~1.5.1",
+    "stylus-brunch": "~1.5.1",
+    "uglify-js-brunch": "~1.5.1",
+    "clean-css-brunch": "~1.5.1",
+    "auto-reload-brunch": "~1.7.0",
+    "ember-handlebars-brunch": "~1.0.0"
+  },
+  "devDependencies": {
+    "karma": "~0.10.2",
+    "karma-qunit": "*"
   },
   "scripts": {
     "start": "node app.js",
