@@ -36,7 +36,7 @@
   "scripts": {
     "start": "node app.js",
     "debug": "node debug app.js",
-    "postinstall": "cd frontend; npm install; brunch build --production"
+    "postinstall": "cd frontend; brunch build --production"
   },
   "main": "app.js",
   "repository": "",
