@@ -1,1 +1,1 @@
-web: node app.js
+web: cd frontend && brunch build --production && node ../app.js
