@@ -1,21 +1,16 @@
-/**
- * isAuthenticated
- *
- * @module      :: Policy
- * @description :: Simple policy to allow any authenticated user
- *                 Assumes that your login action in one of your controllers sets `req.session.authenticated = true;`
- * @docs        :: http://sailsjs.org/#!documentation/policies
- *
- */
-module.exports = function(req, res, next) {
+var express = require('../../node_modules/sails/node_modules/express');
 
-  // User is allowed, proceed to the next policy, 
-  // or if this is the last policy, the controller
-  if (req.session.authenticated) {
+module.exports = function(req, res, next) {
+  var basicAuth = sails.config.basicAuth,
+    username = basicAuth.username,
+    password = basicAuth.password;
+
+  if(!basicAuth.enabled) {
     return next();
   }
 
-  // User is not allowed
-  // (default res.forbidden() behavior can be overridden in `config/403.js`)
-  return res.forbidden('You are not permitted to perform this action.');
+  express.basicAuth(username, password)(req, res, function() {
+   return next();
+  });
+
 };
