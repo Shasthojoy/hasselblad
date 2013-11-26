@@ -20,9 +20,5 @@ module.exports.policies = {
 
   IndexController: {
 		'*': 'isAuthenticated'
-  },
-
-	StatController: {
-		'*': 'isAuthenticated'
-	},
+  }
 };
