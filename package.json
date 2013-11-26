@@ -27,7 +27,8 @@
     "uglify-js-brunch": "~1.5.1",
     "clean-css-brunch": "~1.5.1",
     "auto-reload-brunch": "~1.7.0",
-    "ember-handlebars-brunch": "~1.0.0"
+    "ember-handlebars-brunch": "~1.0.0",
+    "nodetime": "~0.8.14"
   },
   "devDependencies": {
     "karma": "~0.10.2",

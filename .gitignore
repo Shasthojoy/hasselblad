@@ -45,3 +45,4 @@ nbproject
 ########################
 config/local.js
 local.coffee
+.env
