@@ -37,6 +37,25 @@ module.exports = {
     });
   },
 
+  find: function(req, res) {
+    sails.log.info('StatController find action...');
+    var filterBy = null;
+
+    if(req.query !== null) {
+      filterBy = req.query.filter;
+    } else if(req.body !== null) {
+      filterBy = req.body.filter;
+    }
+
+    Stat.findOne(req.param('id'), function(err, stat) {
+      if(err) return res.send(err, 500);
+
+      stat.snapshots = stat.filterSnapshots(filterBy);
+
+      return res.json(stat);
+    });
+  },
+
   /*
       Overrides for the settings in `config/controllers.js`
       (specific to StatController)
