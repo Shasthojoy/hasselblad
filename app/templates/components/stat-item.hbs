@@ -1,7 +1,7 @@
 <div class="title">{{titleize name}}</div>
 
-{{#if snapshotsAvailable}}
-    <div class="metadata">{{stat-total filteredSnapshots}} | {{timeago lastSnapshotDate}}</div>
+{{#if stats}}
+    <div class="metadata">{{stat-total stats}} | {{timeago lastSnapshotDate}}</div>
 {{/if}}
 
 <div class="filters">
@@ -9,9 +9,12 @@
     <button {{bind-attr class=":filter filterIsYesterday:is-selected"}} {{action "filter" "yesterday"}}>Yesterday</button>
     <button {{bind-attr class=":filter filterIsWeek:is-selected"}} {{action "filter" "week"}}>A Week Ago</button>
     <button {{bind-attr class=":filter filterIsMonth:is-selected"}} {{action "filter" "month"}}>A Month Ago</button>
+    {{! testing... }}
+    {{#link-to 'stat.month' class="filter"}}MONTH{{/link-to}}
+    {{! testing... }}
 </div> {{! .filters }}
 
-<div {{bind-attr class=":data snapshotsAvailable:data-available"}}>
-    {{view App.StatGraphView contentBinding="filteredSnapshots"}}
+<div {{bind-attr class=":data stats:data-available"}}>
+    {{view App.StatGraphView contentBinding="stats"}}
     <p class="no-data">No Data Available</p>
 </div> {{! .data }}
